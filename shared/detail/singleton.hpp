@@ -7,7 +7,7 @@ namespace shared::detail
 {
 
 template< typename T >
-class Singleton : public NoCopy, NoMove
+class Singleton : public NoCopy
 {
 public:
 	Singleton() = default;
