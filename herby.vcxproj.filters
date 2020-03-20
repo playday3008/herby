@@ -43,8 +43,6 @@
     <ClInclude Include="sdk\object\entity.hpp" />
     <ClInclude Include="sdk\object\weapon.hpp" />
     <ClInclude Include="shared\auto.hpp" />
-    <ClInclude Include="shared\detail\no_copy.hpp" />
-    <ClInclude Include="shared\detail\no_move.hpp" />
     <ClInclude Include="shared\detail\singleton.hpp" />
     <ClInclude Include="shared\imgui\imgui.hpp" />
     <ClInclude Include="shared\imgui\imgui_impl_dx9.hpp" />
@@ -71,6 +69,8 @@
     <ClInclude Include="csgo\feature\triggerbot.hpp" />
     <ClInclude Include="csgo\hook\procedure.hpp" />
     <ClInclude Include="shared\imgui\imconfig.hpp" />
+    <ClInclude Include="shared\detail\no_copy.hpp" />
+    <ClInclude Include="shared\detail\no_move.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="sdk\object\player.hpp" />

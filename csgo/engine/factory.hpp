@@ -1,6 +1,6 @@
 #pragma once
 
-#include "horizon/auto.hpp"
+#include "shared/auto.hpp"
 
 namespace csgo::engine
 {
@@ -8,7 +8,7 @@ namespace csgo::engine
 class Factory : public detail::Singleton< Factory >
 {
 public:
-	Factory( const std::wstring& image_name );
+	Factory( const std::string& image_name );
 
 private:
 	void* Query( const std::string& name, bool custom );

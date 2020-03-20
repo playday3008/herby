@@ -29,8 +29,8 @@ bool Create()
 	auto& renderer = engine::Renderer::Instance();
 	auto& net_prop_system = engine::NetPropSystem::Instance();
 
-	engine::Factory factory_client( L"client_panorama.dll" );
-	engine::Factory factory_engine( L"engine.dll" );
+	engine::Factory factory_client( "client_panorama.dll" );
+	engine::Factory factory_engine( "engine.dll" );
 
 	if( !input.Create() )
 		return false;

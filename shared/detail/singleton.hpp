@@ -5,19 +5,16 @@
 
 namespace shared::detail
 {
-
-template< typename T >
-class Singleton : public NoCopy, NoMove
-{
-public:
-	Singleton() = default;
-
-public:
-	static T& Instance()
+	template< typename T >
+	class Singleton : public NoCopy, NoMove
 	{
-		static T object = { };
-		return object;
-	}
-};
-
+	public:
+		Singleton() = default;
+	public:
+		static T& Instance()
+		{
+			static T object = { };
+			return object;
+		}
+	};
 }

@@ -5,8 +5,8 @@
 namespace csgo::engine
 {
 
-Factory::Factory( const std::wstring& image_name ) :
-	m_image( GetModuleHandleW( image_name.c_str() ) )
+Factory::Factory( const std::string& image_name ) :
+	m_image( GetModuleHandleA( image_name.c_str() ) )
 {
 
 }
