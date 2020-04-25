@@ -58,7 +58,7 @@ bool Create()
 	if( !m_globals )
 		return false;
 
-	m_direct_device = memory::scan< IDirect3DDevice9* >( L"shaderapidx9.dll", "B9 ? ? ? ? 8B 47", 1, 2 );
+	m_direct_device = memory::scan< IDirect3DDevice9* >( L"shaderapidx9.dll", "A1 ? ? ? ? 50 8B 08 FF 51 0C", 1, 2 );
 
 	if( !m_direct_device )
 		return false;

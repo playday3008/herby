@@ -23,6 +23,8 @@ HRESULT API_D3D Present( IDirect3DDevice9* device, const RECT* source_rect, cons
 {
 	auto& renderer = engine::Renderer::Instance();
 
+	auto& gui = feature::Gui::Instance();
+
 	if( renderer.Begin() )
 	{
 		RenderMap();
@@ -30,8 +32,9 @@ HRESULT API_D3D Present( IDirect3DDevice9* device, const RECT* source_rect, cons
 		renderer.DrawText( { 20.f, 10.f }, engine::TextLeft, { 1.f, 1.f, 1.f }, "overlay" );
 		
 		renderer.End();
-		renderer.Present();
 	}
+	gui.Present();
+	renderer.Present();
 
 	m_present_hook->Restore();
 	const auto result = m_present_hook->Win32Call< HRESULT >( device, source_rect, dest_rect, dest_window_override, dirty_region );
