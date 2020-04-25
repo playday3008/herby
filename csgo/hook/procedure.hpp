@@ -9,5 +9,6 @@ HRESULT API_D3D Present( IDirect3DDevice9* device, const RECT* source_rect, cons
 HRESULT API_D3D Reset( IDirect3DDevice9* device, D3DPRESENT_PARAMETERS* presentation_parameters );
 
 INT API_FASTCALL FrameStageNotify( void* ecx, void* edx, int stage );
+VOID API_FASTCALL CreateMove(int sequence_number, float input_sample_frametime, bool active);
 
 }

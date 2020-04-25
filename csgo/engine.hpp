@@ -3,7 +3,7 @@
 #include "sdk/sdk.hpp"
 
 #include "csgo/engine/renderer.hpp"
-
+#include "csgo/engine/prediction.hpp"
 #include "csgo/feature/triggerbot.hpp"
 #include "csgo/feature/aimbot.hpp"
 #include "csgo/feature/gui.hpp"
@@ -27,6 +27,7 @@ extern memory::ObjectHook::Shared m_present_hook;
 extern memory::ObjectHook::Shared m_reset_hook;
 
 extern memory::ObjectHook::Shared m_frame_stage_notify_hook;
+extern memory::ObjectHook::Shared m_create_move_hook;
 
 bool Create();
 void Destroy();

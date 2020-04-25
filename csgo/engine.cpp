@@ -18,6 +18,7 @@ memory::ObjectHook::Shared m_present_hook = { };
 memory::ObjectHook::Shared m_reset_hook = { };
 
 memory::ObjectHook::Shared m_frame_stage_notify_hook = { };
+memory::ObjectHook::Shared m_create_move_hook = { };
 
 bool Create()
 {
@@ -76,11 +77,13 @@ bool Create()
 	const auto reset_address = memory::vget< 16, void* >( m_direct_device );
 
 	const auto frame_stage_notify_address = memory::vget< 37, void* >( m_base_client );
+	const auto create_move_address = memory::vget<22, void*>(m_base_client);
 
 	m_present_hook = std::make_shared< memory::ObjectHook >( present_address, &hook::Present );
 	m_reset_hook = std::make_shared< memory::ObjectHook >( reset_address, &hook::Reset );
 
 	m_frame_stage_notify_hook = std::make_shared< memory::ObjectHook >( frame_stage_notify_address, &hook::FrameStageNotify );
+	m_create_move_hook = std::make_shared<memory::ObjectHook>(create_move_address, &hook::CreateMove);
 
 	return true;
 }
@@ -111,6 +114,9 @@ void Destroy()
 
 	if( m_frame_stage_notify_hook )
 		m_frame_stage_notify_hook.reset();
+
+	if (m_create_move_hook)
+		m_create_move_hook.reset();
 }
 
 }

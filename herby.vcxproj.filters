@@ -32,6 +32,8 @@
     <ClCompile Include="csgo\hook\present.cpp" />
     <ClCompile Include="csgo\hook\reset.cpp" />
     <ClCompile Include="shared\imgui\imgui_demo.cpp" />
+    <ClCompile Include="csgo\hook\create_move.cpp" />
+    <ClCompile Include="csgo\engine\prediction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sdk\sdk.hpp" />
@@ -71,6 +73,7 @@
     <ClInclude Include="shared\imgui\imconfig.hpp" />
     <ClInclude Include="shared\detail\no_copy.hpp" />
     <ClInclude Include="shared\detail\no_move.hpp" />
+    <ClInclude Include="csgo\engine\prediction.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="sdk\object\player.hpp" />
