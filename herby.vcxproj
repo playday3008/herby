@@ -143,8 +143,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="csgo\engine\prediction.cpp" />
+    <ClCompile Include="csgo\feature\esp.cpp" />
     <ClCompile Include="csgo\hook\create_move.cpp" />
+    <ClCompile Include="sdk\classes\crc\crc.cpp" />
+    <ClCompile Include="sdk\classes\md5\md5.cpp" />
     <ClCompile Include="shared\imgui\imgui.cpp" />
     <ClCompile Include="shared\imgui\imgui_demo.cpp" />
     <ClCompile Include="shared\imgui\imgui_draw.cpp" />
@@ -163,9 +165,7 @@
     <ClCompile Include="sdk\math\vector2d.cpp" />
     <ClCompile Include="sdk\math\vector4d.cpp" />
     <ClCompile Include="sdk\object\entity.cpp" />
-    <ClCompile Include="sdk\object\player.cpp" />
-    <ClCompile Include="sdk\object\weapon.cpp" />
-    <ClCompile Include="sdk\sdk.cpp" />
+    <ClCompile Include="sdk\sdk.hpp" />
     <ClCompile Include="csgo\engine.cpp" />
     <ClCompile Include="csgo\engine\factory.cpp" />
     <ClCompile Include="csgo\engine\net_prop_system.cpp" />
@@ -173,12 +173,37 @@
     <ClCompile Include="csgo\feature\aimbot.cpp" />
     <ClCompile Include="csgo\feature\gui.cpp" />
     <ClCompile Include="csgo\feature\triggerbot.cpp" />
-    <ClCompile Include="csgo\hook\frame_stage_notify.cpp" />
     <ClCompile Include="csgo\hook\present.cpp" />
     <ClCompile Include="csgo\hook\reset.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="csgo\engine\prediction.hpp" />
+    <ClInclude Include="csgo\feature\esp.hpp" />
+    <ClInclude Include="sdk\classes\CCSGOPlayerAnimState.hpp" />
+    <ClInclude Include="sdk\classes\bf_read.hpp" />
+    <ClInclude Include="sdk\classes\BSPFlags.hpp" />
+    <ClInclude Include="sdk\classes\CGlobalVarsBase.hpp" />
+    <ClInclude Include="sdk\classes\CClientState.hpp" />
+    <ClInclude Include="sdk\classes\CGlowObject.hpp" />
+    <ClInclude Include="sdk\classes\CHandle.hpp" />
+    <ClInclude Include="sdk\classes\CInput.hpp" />
+    <ClInclude Include="sdk\classes\crc\crc.hpp" />
+    <ClInclude Include="sdk\classes\CUtlMemory.hpp" />
+    <ClInclude Include="sdk\classes\CUtlVector.hpp" />
+    <ClInclude Include="sdk\classes\DataMap.hpp" />
+    <ClInclude Include="sdk\classes\KeyValues.hpp" />
+    <ClInclude Include="sdk\classes\md5\md5.hpp" />
+    <ClInclude Include="sdk\classes\platform.hpp" />
+    <ClInclude Include="sdk\classes\PlayerInfo.hpp" />
+    <ClInclude Include="sdk\classes\recv\client_class.hpp" />
+    <ClInclude Include="sdk\classes\recv\recv.hpp" />
+    <ClInclude Include="sdk\enums.hpp" />
+    <ClInclude Include="sdk\interfaces\IAppSystem.hpp" />
+    <ClInclude Include="sdk\interfaces\IBaseClientDLL.hpp" />
+    <ClInclude Include="sdk\interfaces\IClientEntity.hpp" />
+    <ClInclude Include="sdk\interfaces\IClientEntityList.hpp" />
+    <ClInclude Include="sdk\interfaces\ICollideable.hpp" />
+    <ClInclude Include="sdk\interfaces\IVEngineClient.hpp" />
+    <ClInclude Include="sdk\math\quaternion.hpp" />
     <ClInclude Include="shared\auto.hpp" />
     <ClInclude Include="shared\detail\no_copy.hpp" />
     <ClInclude Include="shared\detail\no_move.hpp" />
@@ -206,8 +231,7 @@
     <ClInclude Include="sdk\math\vector2d.hpp" />
     <ClInclude Include="sdk\math\vector4d.hpp" />
     <ClInclude Include="sdk\object\entity.hpp" />
-    <ClInclude Include="sdk\object\weapon.hpp" />
-    <ClInclude Include="sdk\sdk.hpp" />
+    <ClInclude Include="sdk\definitions.hpp" />
     <ClInclude Include="csgo\engine.hpp" />
     <ClInclude Include="csgo\engine\factory.hpp" />
     <ClInclude Include="csgo\engine\net_prop_system.hpp" />
@@ -216,9 +240,6 @@
     <ClInclude Include="csgo\feature\gui.hpp" />
     <ClInclude Include="csgo\feature\triggerbot.hpp" />
     <ClInclude Include="csgo\hook\procedure.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="sdk\object\player.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

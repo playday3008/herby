@@ -10,15 +10,13 @@ IBaseClientDLL* m_base_client = nullptr;
 IClientEntityList* m_client_entity_list = nullptr;
 IVEngineClient* m_engine_client = nullptr;
 
+CInput* m_input = nullptr;
 CGlobalVarsBase* m_globals = nullptr;
 
 IDirect3DDevice9* m_direct_device = nullptr;
 
-memory::ObjectHook::Shared m_present_hook = { };
-memory::ObjectHook::Shared m_reset_hook = { };
-
-memory::ObjectHook::Shared m_frame_stage_notify_hook = { };
-memory::ObjectHook::Shared m_create_move_hook = { };
+memory::ObjectHook::Shared m_direct_device_hook = { };
+memory::ObjectHook::Shared m_base_client_hook = { };
 
 bool Create()
 {
@@ -54,12 +52,17 @@ bool Create()
 	if( !m_engine_client )
 		return false;
 
+	m_input = memory::scan< CInput* >(L"client_panorama.dll", "B9 ? ? ? ? F3 0F 11 04 24 FF 50 10", 1, 1u);
+
+	if (!m_input)
+		return false;
+
 	m_globals = memory::scan< CGlobalVarsBase* >( L"client_panorama.dll", "A1 ? ? ? ? 0F 57 ED", 1, 2 );
 
 	if( !m_globals )
 		return false;
 
-	m_direct_device = memory::scan< IDirect3DDevice9* >( L"shaderapidx9.dll", "A1 ? ? ? ? 50 8B 08 FF 51 0C", 1, 2 );
+	m_direct_device = memory::scan< IDirect3DDevice9* >( L"shaderapidx9.dll", "B9 ? ? ? ? 8B 47", 1, 2 );
 
 	if( !m_direct_device )
 		return false;
@@ -73,17 +76,13 @@ bool Create()
 	if( !gui.Create() )
 		return false;
 
-	const auto present_address = memory::vget< 17, void* >( m_direct_device );
-	const auto reset_address = memory::vget< 16, void* >( m_direct_device );
+	m_direct_device_hook = std::make_shared< memory::ObjectHook >(m_direct_device);
+	m_base_client_hook = std::make_shared< memory::ObjectHook >(m_base_client);
 
-	const auto frame_stage_notify_address = memory::vget< 37, void* >( m_base_client );
-	const auto create_move_address = memory::vget<22, void*>(m_base_client);
+	m_direct_device_hook->Hook(&hook::Reset,16);
+	m_direct_device_hook->Hook(&hook::Present, 17);
 
-	m_present_hook = std::make_shared< memory::ObjectHook >( present_address, &hook::Present );
-	m_reset_hook = std::make_shared< memory::ObjectHook >( reset_address, &hook::Reset );
-
-	m_frame_stage_notify_hook = std::make_shared< memory::ObjectHook >( frame_stage_notify_address, &hook::FrameStageNotify );
-	m_create_move_hook = std::make_shared<memory::ObjectHook>(create_move_address, &hook::CreateMove);
+	m_base_client_hook->Hook(&hook::CreateMove, 22);
 
 	return true;
 }
@@ -106,17 +105,8 @@ void Destroy()
 	renderer.Destroy();
 	net_prop_system.Destroy();
 
-	if( m_present_hook )
-		m_present_hook.reset();
-
-	if( m_reset_hook )
-		m_reset_hook.reset();
-
-	if( m_frame_stage_notify_hook )
-		m_frame_stage_notify_hook.reset();
-
-	if (m_create_move_hook)
-		m_create_move_hook.reset();
+	m_direct_device_hook->Destroy();
+	m_base_client_hook->Destroy();
 }
 
 }

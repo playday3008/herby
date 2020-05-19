@@ -35,6 +35,15 @@ void System::SetExecuteState( const ExecuteState execute_state )
 	m_execute_state = execute_state;
 }
 
+const std::string& System::GetExecuteDirectory() const
+{
+	return m_execute_directory;
+}
+void System::SetExecuteDirectory(const std::string& execute_directory)
+{
+	m_execute_directory = execute_directory;
+}
+
 bool System::Gui()
 {
 	auto& system = System::Instance();

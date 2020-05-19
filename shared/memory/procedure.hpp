@@ -1,6 +1,6 @@
 #pragma once
-
 #include <iostream>
+#include "shared/include/auto.hpp"
 
 namespace shared::memory
 {
@@ -18,6 +18,4 @@ T Call( void* object, ArgsT... args )
 	const auto procedure = vget< N, T( __thiscall* )( void*, ArgsT... ) >( object );
 	return procedure( object, args... );
 }
-
-
 }

@@ -1805,6 +1805,7 @@ struct ImColor
 
     // FIXME-OBSOLETE: May need to obsolete/cleanup those helpers.
     inline void    SetHSV(float h, float s, float v, float a = 1.0f){ ImGui::ColorConvertHSVtoRGB(h, s, v, Value.x, Value.y, Value.z); Value.w = a; }
+    inline void    SetAlpha(float a = 1.0f) { Value.w = a; }
     static ImColor HSV(float h, float s, float v, float a = 1.0f)   { float r,g,b; ImGui::ColorConvertHSVtoRGB(h, s, v, r, g, b); return ImColor(r,g,b,a); }
 };
 

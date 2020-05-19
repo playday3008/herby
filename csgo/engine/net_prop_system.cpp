@@ -33,6 +33,34 @@ int NetPropSystem::Get( const char* recv_table_name, const char* recv_prop_name 
 	return GetRecursive( recv_table, recv_prop_name );
 }
 
+int NetPropSystem::Get(datamap_t* map, const char* name)
+{
+	while (map)
+	{
+		for (auto i = 0; i < map->dataNumFields; i++)
+		{
+			if (map->dataDesc[i].fieldName == nullptr)
+				continue;
+
+			if (strcmp(name, map->dataDesc[i].fieldName) == 0)
+				return map->dataDesc[i].fieldOffset[TD_OFFSET_NORMAL];
+
+			if (map->dataDesc[i].fieldType == FIELD_EMBEDDED)
+			{
+				if (map->dataDesc[i].td)
+				{
+					unsigned int offset;
+
+					if ((offset = Get(map->dataDesc[i].td, name)) != 0)
+						return offset;
+				}
+			}
+		}
+		map = map->baseMap;
+	}
+	return 0u;
+}
+
 int NetPropSystem::GetRecursive( RecvTable* recv_table, const char* recv_prop_name ) const
 {
 	auto extra = 0;

@@ -10,6 +10,8 @@
 #include "shared/memory/macro.hpp"
 #include "shared/memory/scan.hpp"
 
+#include "shared/storage/option.hpp"
+
 #include "shared/system/system.hpp"
 
 #include "shared/win32/input.hpp"

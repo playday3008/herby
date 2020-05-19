@@ -12,6 +12,7 @@ public:
 	void Destroy();
 
 	int Get( const char* recv_table_name, const char* recv_prop_name ) const;
+	int Get(datamap_t* map, const char* name);
 
 private:
 	int GetRecursive( RecvTable* recv_table, const char* recv_prop_name ) const;

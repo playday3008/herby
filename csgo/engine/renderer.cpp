@@ -93,8 +93,8 @@ void Renderer::DrawRect( const ImVec2& begin, const ImVec2& size, const ImColor&
 	auto render = GetDrawList();
 
 	( fill ? 
-		render->AddRectFilled( { begin[ 0 ], begin[ 1 ] }, { begin[ 0 ] + size[ 0 ], begin[ 1 ] + size[ 1 ] }, color ) : 
-		render->AddRect( { begin[ 0 ], begin[ 1 ] }, { begin[ 0 ] + size[ 0 ], begin[ 1 ] + size[ 1 ] }, color ) );
+		render->AddRectFilled({ begin[0], begin[1] }, { begin[0] + size[0], begin[1] + size[1] }, color ) :
+		render->AddRect({ begin[0], begin[1] }, { begin[0] + size[0], begin[1] + size[1] }, color ) );
 }
 
 void Renderer::DrawOutRect( const ImVec2& begin, const ImVec2& size, const ImColor& color )
@@ -184,7 +184,7 @@ void Renderer::GetTextSize( ImVec2& output, const char* message, ... )
 
 ImDrawList* Renderer::GetDrawList()
 {
-	return ImGui::GetWindowDrawList();
+	return ImGui::GetOverlayDrawList();
 }
 
 }

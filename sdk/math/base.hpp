@@ -6,6 +6,7 @@
 #include "sdk/math/vector.hpp"
 #include "sdk/math/vector2d.hpp"
 #include "sdk/math/vector4d.hpp"
+#include "sdk/math/quaternion.hpp"
 
 constexpr auto g_pi_radians = static_cast< float >( 3.14159265358979323846 );
 constexpr auto g_pi_degrees = static_cast< float >( 180.0 );
@@ -18,6 +19,8 @@ class QAngle;
 class Vector;
 class Vector2D;
 class Vector4D;
+class Quaternion;
+class RadianEuler;
 
 struct matrix3x4_t
 {

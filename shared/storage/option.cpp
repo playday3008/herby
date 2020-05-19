@@ -2,14 +2,17 @@
 
 namespace shared::option
 {
-bool Create()
-{
-	return true;
-}
+	VisualData m_visual = { };
+	MiscData m_misc = { };
 
-void Destroy()
-{
+	bool Create()
+	{
+		return true;
+	}
 
-}
+	void Destroy()
+	{
+
+	}
 
 }

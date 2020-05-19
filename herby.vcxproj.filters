@@ -2,15 +2,12 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main\entry.cpp" />
-    <ClCompile Include="sdk\sdk.cpp" />
     <ClCompile Include="sdk\math\qangle.cpp" />
     <ClCompile Include="sdk\math\vector.cpp" />
     <ClCompile Include="sdk\math\vector2d.cpp" />
     <ClCompile Include="sdk\math\vector4d.cpp" />
     <ClCompile Include="sdk\math\base.cpp" />
-    <ClCompile Include="sdk\object\player.cpp" />
     <ClCompile Include="sdk\object\entity.cpp" />
-    <ClCompile Include="sdk\object\weapon.cpp" />
     <ClCompile Include="shared\imgui\imgui.cpp" />
     <ClCompile Include="shared\imgui\imgui_draw.cpp" />
     <ClCompile Include="shared\imgui\imgui_impl_dx9.cpp" />
@@ -28,22 +25,22 @@
     <ClCompile Include="csgo\feature\aimbot.cpp" />
     <ClCompile Include="csgo\feature\gui.cpp" />
     <ClCompile Include="csgo\feature\triggerbot.cpp" />
-    <ClCompile Include="csgo\hook\frame_stage_notify.cpp" />
     <ClCompile Include="csgo\hook\present.cpp" />
     <ClCompile Include="csgo\hook\reset.cpp" />
     <ClCompile Include="shared\imgui\imgui_demo.cpp" />
+    <ClCompile Include="csgo\feature\esp.cpp" />
     <ClCompile Include="csgo\hook\create_move.cpp" />
-    <ClCompile Include="csgo\engine\prediction.cpp" />
+    <ClCompile Include="sdk\sdk.hpp" />
+    <ClCompile Include="sdk\classes\crc\crc.cpp" />
+    <ClCompile Include="sdk\classes\md5\md5.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sdk\sdk.hpp" />
     <ClInclude Include="sdk\math\qangle.hpp" />
     <ClInclude Include="sdk\math\vector.hpp" />
     <ClInclude Include="sdk\math\vector2d.hpp" />
     <ClInclude Include="sdk\math\vector4d.hpp" />
     <ClInclude Include="sdk\math\base.hpp" />
     <ClInclude Include="sdk\object\entity.hpp" />
-    <ClInclude Include="sdk\object\weapon.hpp" />
     <ClInclude Include="shared\auto.hpp" />
     <ClInclude Include="shared\detail\singleton.hpp" />
     <ClInclude Include="shared\imgui\imgui.hpp" />
@@ -73,9 +70,33 @@
     <ClInclude Include="shared\imgui\imconfig.hpp" />
     <ClInclude Include="shared\detail\no_copy.hpp" />
     <ClInclude Include="shared\detail\no_move.hpp" />
-    <ClInclude Include="csgo\engine\prediction.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="sdk\object\player.hpp" />
+    <ClInclude Include="csgo\feature\esp.hpp" />
+    <ClInclude Include="sdk\definitions.hpp" />
+    <ClInclude Include="sdk\enums.hpp" />
+    <ClInclude Include="sdk\classes\crc\crc.hpp" />
+    <ClInclude Include="sdk\classes\md5\md5.hpp" />
+    <ClInclude Include="sdk\math\quaternion.hpp" />
+    <ClInclude Include="sdk\classes\recv\client_class.hpp" />
+    <ClInclude Include="sdk\classes\recv\recv.hpp" />
+    <ClInclude Include="sdk\classes\bf_read.hpp" />
+    <ClInclude Include="sdk\classes\CGlobalVarsBase.hpp" />
+    <ClInclude Include="sdk\classes\CClientState.hpp" />
+    <ClInclude Include="sdk\classes\CCSGOPlayerAnimState.hpp" />
+    <ClInclude Include="sdk\classes\BSPFlags.hpp" />
+    <ClInclude Include="sdk\classes\CHandle.hpp" />
+    <ClInclude Include="sdk\classes\CUtlMemory.hpp" />
+    <ClInclude Include="sdk\classes\platform.hpp" />
+    <ClInclude Include="sdk\classes\CUtlVector.hpp" />
+    <ClInclude Include="sdk\classes\CInput.hpp" />
+    <ClInclude Include="sdk\classes\DataMap.hpp" />
+    <ClInclude Include="sdk\classes\KeyValues.hpp" />
+    <ClInclude Include="sdk\classes\PlayerInfo.hpp" />
+    <ClInclude Include="sdk\interfaces\IAppSystem.hpp" />
+    <ClInclude Include="sdk\interfaces\IClientEntity.hpp" />
+    <ClInclude Include="sdk\interfaces\ICollideable.hpp" />
+    <ClInclude Include="sdk\classes\CGlowObject.hpp" />
+    <ClInclude Include="sdk\interfaces\IBaseClientDLL.hpp" />
+    <ClInclude Include="sdk\interfaces\IClientEntityList.hpp" />
+    <ClInclude Include="sdk\interfaces\IVEngineClient.hpp" />
   </ItemGroup>
 </Project>

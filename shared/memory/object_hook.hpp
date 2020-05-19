@@ -13,49 +13,29 @@ class ObjectHook : public detail::NoCopy, public detail::NoMove
 {
 public:
 	using Shared = std::shared_ptr< ObjectHook >;
-
 public:
-	ObjectHook() = default;
-
-public:
-	ObjectHook( void* procedure, void* replace );
+	ObjectHook(void* instance = nullptr);
 	~ObjectHook();
-
 public:
-	bool Create( void* procedure, void* replace );
+	bool Create(void* instance);
 	void Destroy();
 
-	void Replace();
-	void Restore();
-
+	bool Set(bool state);
+	bool Hook(void* hooked, std::size_t inde);
 public:
-	template< typename T, typename... ArgsT >
-	T Call( ArgsT... args )
+	template< typename T >
+	inline T Get(std::size_t index)
 	{
-		auto fn = reinterpret_cast< T( __thiscall* )( ArgsT... ) >( m_procedure );
-		return fn( args... );
-	}
+		if (!m_restore || index >= m_size)
+			return (T)nullptr;
 
-	template< typename T, typename... ArgsT >
-	T Win32Call( ArgsT... args )
-	{
-		auto fn = reinterpret_cast< T( __stdcall* )( ArgsT... ) >( m_procedure );
-		return fn( args... );
+		return (T)m_restore[index];
 	}
-
-	template< typename T, typename... ArgsT >
-	T FastCall( ArgsT... args )
-	{
-		auto fn = reinterpret_cast< T( __fastcall* )( ArgsT... ) >( m_procedure );
-		return fn( args... );
-	}
-
 private:
-	std::uint8_t* m_restore = nullptr;
-	DWORD m_protect = 0;
-
-	std::uint8_t* m_procedure = nullptr;
-	void* m_replace = nullptr;
+	std::uintptr_t** m_instance = nullptr;
+	std::uintptr_t* m_restore = nullptr;
+	std::unique_ptr< std::uintptr_t[] > m_replace = nullptr;
+	std::size_t m_size = 0u;
 };
 
 }

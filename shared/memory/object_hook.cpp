@@ -1,66 +1,69 @@
 #include "shared/memory/object_hook.hpp"
-
+#include "shared/memory/scan.hpp"
 namespace shared::memory
 {
-
-ObjectHook::ObjectHook( void* procedure, void* replace )
-{
-	if( !Create( procedure, replace ) )
+	ObjectHook::ObjectHook(void* instance /*= nullptr*/)
 	{
-		// throw exception
+		if (instance)
+			Create(instance);
 	}
-}
 
-ObjectHook::~ObjectHook()
-{
-	Destroy();
-}
+	ObjectHook::~ObjectHook()
+	{
+		Destroy();
+	}
 
-bool ObjectHook::Create( void* procedure, void* replace )
-{
-	m_procedure = reinterpret_cast< std::uint8_t* >( procedure );
+	bool ObjectHook::Create(void* instance)
+	{
+		m_instance = reinterpret_cast<std::uintptr_t**>(instance);
 
-	if( !m_procedure )
-		return false;
+		if (!m_instance)
+			return false;
 
-	m_replace = replace;
+		m_restore = *m_instance;
 
-	if( !m_replace )
-		return false;
+		if (!m_restore)
+			return false;
 
-	m_restore = new std::uint8_t[ 7 ];
-	memcpy( m_restore, m_procedure, 7 );
+		while (m_restore[m_size])
+			m_size++;
 
-	VirtualProtect( m_procedure, 16, PAGE_EXECUTE_READWRITE, &m_protect );
-	Replace();
+		if (!m_size)
+			return false;
 
-	return true;
-}
+		m_replace = std::make_unique< std::uintptr_t[] >(m_size);
+		std::memcpy(m_replace.get(), m_restore, m_size * sizeof(std::uintptr_t));
 
-void ObjectHook::Destroy()
-{
-	Restore();
-}
+		if (!Set(true))
+			return false;
 
-void ObjectHook::Replace()
-{
-	if( !m_procedure )
-		return;
+		return true;
+	}
 
-	*( std::uint16_t* )( m_procedure ) = 0x50B8;
-	*( void** )( m_procedure + 1 ) = m_replace;
-	*( std::uint16_t* )( m_procedure + 5 ) = 0xE0FF;
-}
+	void ObjectHook::Destroy()
+	{
+		Set(false);
 
-void ObjectHook::Restore()
-{
-	if( !m_procedure )
-		return;
+		m_instance = nullptr;
+		m_restore = nullptr;
+		m_replace.reset();
+		m_size = 0u;
+	}
 
-	if( !m_restore )
-		return;
+	bool ObjectHook::Set(bool state)
+	{
+		if (!m_instance || !m_restore || !m_replace)
+			return false;
 
-	memcpy( m_procedure, m_restore, 7 );
-}
+		auto data = state ? m_replace.get() : m_restore;
+		return (*m_instance = data);
+	}
 
+	bool ObjectHook::Hook(void* hooked, std::size_t index)
+	{
+		if (!m_replace)
+			return false;
+
+		return (m_replace[index] = (std::uintptr_t)hooked);
+	}
 }

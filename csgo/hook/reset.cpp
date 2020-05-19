@@ -7,17 +7,17 @@ namespace csgo::hook
 
 HRESULT API_D3D Reset( IDirect3DDevice9* device, D3DPRESENT_PARAMETERS* presentation_parameters )
 {
+	static auto result = m_direct_device_hook->Get<decltype(&Reset)>(16);
+
 	auto& renderer = engine::Renderer::Instance();
 
 	renderer.Lost();
 
-	m_reset_hook->Restore();
-	const auto result = m_reset_hook->Win32Call< HRESULT >( device, presentation_parameters );
-	m_reset_hook->Replace();
+	auto hr = result(device, presentation_parameters);
 
-	renderer.Reset( result );
+	renderer.Reset(hr);
 
-	return result;
+	return hr;
 }
 
 }
