@@ -41,6 +41,17 @@ void Vector::Invalidate()
 	z = FLT_MAX;
 }
 
+float* Vector::Base()
+{
+	return (float*)this;
+}
+
+float* Vector::Base() const
+{
+	return (float*)this;
+}
+
+
 bool Vector::IsValid() const
 {
 	return ( !IsZero() );

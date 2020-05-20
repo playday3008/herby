@@ -33,6 +33,7 @@
     <ClCompile Include="sdk\sdk.hpp" />
     <ClCompile Include="sdk\classes\crc\crc.cpp" />
     <ClCompile Include="sdk\classes\md5\md5.cpp" />
+    <ClCompile Include="sdk\interfaces\IMaterialSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sdk\math\qangle.hpp" />
@@ -98,5 +99,15 @@
     <ClInclude Include="sdk\interfaces\IBaseClientDLL.hpp" />
     <ClInclude Include="sdk\interfaces\IClientEntityList.hpp" />
     <ClInclude Include="sdk\interfaces\IVEngineClient.hpp" />
+    <ClInclude Include="sdk\interfaces\IGameMovement.hpp" />
+    <ClInclude Include="sdk\interfaces\IPrediction.hpp" />
+    <ClInclude Include="sdk\interfaces\IViewRenderBeams.hpp" />
+    <ClInclude Include="sdk\interfaces\INetChannelInfo.hpp" />
+    <ClInclude Include="sdk\interfaces\IEngineSound.hpp" />
+    <ClInclude Include="sdk\interfaces\IEngineTrace.hpp" />
+    <ClInclude Include="sdk\interfaces\IGameEvent.hpp" />
+    <ClInclude Include="sdk\interfaces\IMaterial.hpp" />
+    <ClInclude Include="sdk\interfaces\IMaterialSystem.hpp" />
+    <ClInclude Include="sdk\interfaces\IVModelInfo.hpp" />
   </ItemGroup>
 </Project>

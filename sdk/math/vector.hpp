@@ -1,8 +1,8 @@
 #pragma once
 
 #include "shared/auto.hpp"
-
 #include "sdk/math/vector4d.hpp"
+#include <functional>
 
 class Vector
 {
@@ -15,6 +15,9 @@ public:
 public:
 	void Init( const float vector_x = 0.f, const float vector_y = 0.f, const float vector_z = 0.f );
 	void Invalidate();
+
+	float* Base();
+	float* Base() const;
 
 	bool IsValid() const;
 	bool IsZero() const;
@@ -80,4 +83,33 @@ public:
 	float x = 0.f;
 	float y = 0.f;
 	float z = 0.f;
+};
+
+class __declspec(align(16)) VectorAligned : public Vector
+{
+public:
+	inline VectorAligned(void) {};
+	inline VectorAligned(float X, float Y, float Z)
+	{
+		Init(X, Y, Z);
+	}
+
+public:
+	explicit VectorAligned(const Vector& vOther)
+	{
+		Init(vOther.x, vOther.y, vOther.z);
+	}
+
+	VectorAligned& operator=(const Vector& vOther)
+	{
+		Init(vOther.x, vOther.y, vOther.z);
+		return *this;
+	}
+
+	VectorAligned& operator=(const VectorAligned& vOther)
+	{
+		_mm_store_ps(Base(), _mm_load_ps(vOther.Base()));
+		return *this;
+	}
+	float w;
 };

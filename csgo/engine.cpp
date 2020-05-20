@@ -9,6 +9,7 @@ namespace csgo
 IBaseClientDLL* m_base_client = nullptr;
 IClientEntityList* m_client_entity_list = nullptr;
 IVEngineClient* m_engine_client = nullptr;
+IVModelInfo* m_model_info = nullptr;
 
 CInput* m_input = nullptr;
 CGlobalVarsBase* m_globals = nullptr;
@@ -50,6 +51,11 @@ bool Create()
 	m_engine_client = factory_engine.Get< IVEngineClient* >( "VEngineClient" );
 
 	if( !m_engine_client )
+		return false;
+
+	m_model_info = factory_engine.Get< IVModelInfo* >("VModelInfoClient");
+
+	if (!m_model_info)
 		return false;
 
 	m_input = memory::scan< CInput* >(L"client_panorama.dll", "B9 ? ? ? ? F3 0F 11 04 24 FF 50 10", 1, 1u);

@@ -147,6 +147,7 @@
     <ClCompile Include="csgo\hook\create_move.cpp" />
     <ClCompile Include="sdk\classes\crc\crc.cpp" />
     <ClCompile Include="sdk\classes\md5\md5.cpp" />
+    <ClCompile Include="sdk\interfaces\IMaterialSystem.cpp" />
     <ClCompile Include="shared\imgui\imgui.cpp" />
     <ClCompile Include="shared\imgui\imgui_demo.cpp" />
     <ClCompile Include="shared\imgui\imgui_draw.cpp" />
@@ -202,7 +203,17 @@
     <ClInclude Include="sdk\interfaces\IClientEntity.hpp" />
     <ClInclude Include="sdk\interfaces\IClientEntityList.hpp" />
     <ClInclude Include="sdk\interfaces\ICollideable.hpp" />
+    <ClInclude Include="sdk\interfaces\IEngineSound.hpp" />
+    <ClInclude Include="sdk\interfaces\IEngineTrace.hpp" />
+    <ClInclude Include="sdk\interfaces\IGameEvent.hpp" />
+    <ClInclude Include="sdk\interfaces\IGameMovement.hpp" />
+    <ClInclude Include="sdk\interfaces\IMaterial.hpp" />
+    <ClInclude Include="sdk\interfaces\IMaterialSystem.hpp" />
+    <ClInclude Include="sdk\interfaces\INetChannelInfo.hpp" />
+    <ClInclude Include="sdk\interfaces\IPrediction.hpp" />
     <ClInclude Include="sdk\interfaces\IVEngineClient.hpp" />
+    <ClInclude Include="sdk\interfaces\IViewRenderBeams.hpp" />
+    <ClInclude Include="sdk\interfaces\IVModelInfo.hpp" />
     <ClInclude Include="sdk\math\quaternion.hpp" />
     <ClInclude Include="shared\auto.hpp" />
     <ClInclude Include="shared\detail\no_copy.hpp" />
