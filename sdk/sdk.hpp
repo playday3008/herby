@@ -33,3 +33,4 @@
 #include "sdk/interfaces/IVEngineClient.hpp"
 #include "sdk/interfaces/IViewRenderBeams.hpp"
 #include "sdk/interfaces/IVModelInfo.hpp"
+#include "sdk/interfaces/IVDebugOverlay.hpp"

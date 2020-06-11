@@ -9,14 +9,52 @@ namespace shared::option
 {
 	struct VisualData
 	{
-		bool m_enabled = false;
-		bool m_box = false;
-		bool m_corner = false;
-		bool m_health = false;
+		bool dormant;
 
-		///Colors
-		ImColor box_color = ImColor();
-		ImColor name_color = ImColor();
+		struct {
+			bool e_money;
+			bool e_armour;
+			bool e_zoom;
+			bool e_flashed;
+			bool e_reloading;
+			bool e_bomb;
+
+			bool f_money;
+			bool f_armour;
+			bool f_zoom;
+			bool f_flashed;
+			bool f_reloading;
+			bool f_bomb;
+
+		} flags;
+
+		struct {
+			bool friendly;
+			bool enemy;
+
+			ImColor f_box_clr = ImColor(250, 200, 0);
+			ImColor e_box_clr = ImColor(150, 200, 60);
+		} boxes;
+
+		struct {
+			bool friendly;
+			bool enemy;
+
+			ImColor name_clr;
+		} name;
+
+		struct {
+			bool friendly;
+			bool enemy;
+			bool ammo;
+
+			ImColor ammo_clr = ImColor(180, 10, 40);
+		} weapon;
+
+		struct {
+			bool friendly;
+			bool enemy;
+		} health;
 	};
 
 	struct MiscData

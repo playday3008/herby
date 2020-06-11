@@ -1,76 +1,65 @@
 #include "csgo/feature/esp.hpp"
 namespace csgo::feature
 {
+	static int alpha[65];
+	static int out_alpha[65];
+	int iterator;
+
 	auto& renderer = engine::Renderer::Instance();
 	auto& esp = option::m_visual;
 
-	bool Esp::GetBBox(C_BaseEntity* entity,Vector4D& box)
+	bool Esp::GetBBox(C_BaseEntity* entity,box_t& box)
 	{
-		const matrix3x4_t& tran_frame = entity->m_rgflCoordinateFrame();
+		Vector origin, min, max, flb, brt, blb, frt, frb, brb, blt, flt;
+		float left, top, right, bottom;
 
-		const Vector min = entity->GetCollideable()->OBBMins();
-		const Vector max = entity->GetCollideable()->OBBMaxs();
+		origin = entity->m_vecOrigin();
+		min = entity->GetCollideable()->OBBMins() + origin;
+		max = entity->GetCollideable()->OBBMaxs() + origin;
 
-		Vector screen_boxes[8];
+		Vector points[] = { Vector(min.x, min.y, min.z),
+		Vector(min.x, max.y, min.z),
+		Vector(max.x, max.y, min.z),
+		Vector(max.x, min.y, min.z),
+		Vector(max.x, max.y, max.z),
+		Vector(min.x, max.y, max.z),
+		Vector(min.x, min.y, max.z),
+		Vector(max.x, min.y, max.z) };
 
-		Vector  points[] =
-		{
-			{ min.x, min.y, min.z },
-			{ min.x, max.y, min.z },
-			{ max.x, max.y, min.z },
-			{ max.x, min.y, min.z },
-			{ max.x, max.y, max.z },
-			{ min.x, max.y, max.z },
-			{ min.x, min.y, max.z },
-			{ max.x, min.y, max.z }
-		};
+		Vector arr[] = { flb, brt, blb, frt, frb, brb, blt, flt };
 
-		for (int i = 0; i <= 7; i++)
-		{
-			Vector out_vec;
-			VectorTransform(points[i], tran_frame, out_vec);
-			/*if (!WorldToScreen(out_vec, screen_boxes[i]))
-				return false;*/
-		}
+		if (!csgo::m_debug_overlay->ScreenPosition(points[3], flb) || !csgo::m_debug_overlay->ScreenPosition(points[5], brt)
+			|| !csgo::m_debug_overlay->ScreenPosition(points[0], blb) || !csgo::m_debug_overlay->ScreenPosition(points[4], frt)
+			|| !csgo::m_debug_overlay->ScreenPosition(points[2], frb) || !csgo::m_debug_overlay->ScreenPosition(points[1], brb)
+			|| !csgo::m_debug_overlay->ScreenPosition(points[6], blt) || !csgo::m_debug_overlay->ScreenPosition(points[7], flt))
+			return false;
 
-		Vector box_array[] = {
-		screen_boxes[3], // fl
-		screen_boxes[5], // br
-		screen_boxes[0], // bl
-		screen_boxes[4], // fr
-		screen_boxes[2], // fr
-		screen_boxes[1], // br
-		screen_boxes[6], // bl
-		screen_boxes[7] // fl
-		};
+		left = flb.x;
+		top = flb.y;
+		right = flb.x;
+		bottom = flb.y;
 
-		float left = screen_boxes[3].x, bottom = screen_boxes[3].y, right = screen_boxes[3].x, top = screen_boxes[3].y;
-
-		for (int i = 0; i <= 7; i++)
-		{
-			if (left > box_array[i].x)
-				left = box_array[i].x;
-
-			if (bottom < box_array[i].y)
-				bottom = box_array[i].y;
-
-			if (right < box_array[i].x)
-				right = box_array[i].x;
-
-			if (top > box_array[i].y)
-				top = box_array[i].y;
+		for (int i = 1; i < 8; i++) {
+			if (left > arr[i].x)
+				left = arr[i].x;
+			if (bottom < arr[i].y)
+				bottom = arr[i].y;
+			if (right < arr[i].x)
+				right = arr[i].x;
+			if (top > arr[i].y)
+				top = arr[i].y;
 		}
 
 		box.x = left;
 		box.y = top;
-		box.w = right - left;
-		box.z = bottom - top;
+		box.w = float(right - left);
+		box.h = float(bottom - top);
 
 		return true;
 	}
 
 	void Esp::Present()
 	{
-
+		
 	}
 }

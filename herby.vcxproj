@@ -207,10 +207,14 @@
     <ClInclude Include="sdk\interfaces\IEngineTrace.hpp" />
     <ClInclude Include="sdk\interfaces\IGameEvent.hpp" />
     <ClInclude Include="sdk\interfaces\IGameMovement.hpp" />
+    <ClInclude Include="sdk\interfaces\ILocalize.hpp" />
     <ClInclude Include="sdk\interfaces\IMaterial.hpp" />
     <ClInclude Include="sdk\interfaces\IMaterialSystem.hpp" />
     <ClInclude Include="sdk\interfaces\INetChannelInfo.hpp" />
+    <ClInclude Include="sdk\interfaces\IPanel.hpp" />
     <ClInclude Include="sdk\interfaces\IPrediction.hpp" />
+    <ClInclude Include="sdk\interfaces\ISurface.hpp" />
+    <ClInclude Include="sdk\interfaces\IVDebugOverlay.hpp" />
     <ClInclude Include="sdk\interfaces\IVEngineClient.hpp" />
     <ClInclude Include="sdk\interfaces\IViewRenderBeams.hpp" />
     <ClInclude Include="sdk\interfaces\IVModelInfo.hpp" />

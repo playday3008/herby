@@ -33,7 +33,7 @@ int NetPropSystem::Get( const char* recv_table_name, const char* recv_prop_name 
 	return GetRecursive( recv_table, recv_prop_name );
 }
 
-int NetPropSystem::Get(datamap_t* map, const char* name)
+int NetPropSystem::GetDataMap(datamap_t* map, const char* name) const
 {
 	while (map)
 	{
@@ -51,7 +51,7 @@ int NetPropSystem::Get(datamap_t* map, const char* name)
 				{
 					unsigned int offset;
 
-					if ((offset = Get(map->dataDesc[i].td, name)) != 0)
+					if ((offset = GetDataMap(map->dataDesc[i].td, name)) != 0)
 						return offset;
 				}
 			}

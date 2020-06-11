@@ -12,7 +12,7 @@ public:
 	void Destroy();
 
 	int Get( const char* recv_table_name, const char* recv_prop_name ) const;
-	int Get(datamap_t* map, const char* name);
+	int GetDataMap(datamap_t* map, const char* name) const;
 
 private:
 	int GetRecursive( RecvTable* recv_table, const char* recv_prop_name ) const;
@@ -43,4 +43,11 @@ private:
         if( !displacement ) \
              displacement = ( net_prop_system.Get( recv_table_name, recv_prop_name ) + extra ); \
 		return *( return_type* )( this + displacement ); \
+	}
+
+#define DATAMAP( return_type, name, var_name) \
+	return_type& name() const \
+	{ \
+		static auto offset = csgo::engine::NetPropSystem::Instance().GetDataMap( this->GetPredDescMap(),var_name); \
+		return *reinterpret_cast< return_type* >( uintptr_t( this ) + offset ); \
 	}

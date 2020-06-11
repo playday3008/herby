@@ -9,19 +9,12 @@ namespace csgo::hook
 
 	VOID create_move_call(int sequence_number, float input_sample_frametime, bool active)
 	{
-		auto& prediction = engine::Prediction::Instance();
 
 		auto cmd = m_input->GetUserCmd(sequence_number);
-		auto verified = m_input->GetVerifiedCmd(sequence_number);
+		auto verified = m_input->GetVerifiedUserCmd(sequence_number);
 
 		if (!cmd || !cmd->command_number || !verified)
 			return;
-
-		if (prediction.Begin(cmd, &m_send_packet))
-		{
-			///
-		}
-		prediction.End();
 
 		verified->m_cmd = *cmd;
 		verified->m_crc = cmd->GetChecksum();

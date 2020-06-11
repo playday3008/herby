@@ -18,6 +18,7 @@ extern IBaseClientDLL* m_base_client;
 extern IClientEntityList* m_client_entity_list;
 extern IVEngineClient* m_engine_client;
 extern IVModelInfo* m_model_info;
+extern IVDebugOverlay* m_debug_overlay;
 
 extern CInput* m_input;
 extern CGlobalVarsBase* m_globals;

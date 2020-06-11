@@ -109,5 +109,9 @@
     <ClInclude Include="sdk\interfaces\IMaterial.hpp" />
     <ClInclude Include="sdk\interfaces\IMaterialSystem.hpp" />
     <ClInclude Include="sdk\interfaces\IVModelInfo.hpp" />
+    <ClInclude Include="sdk\interfaces\ILocalize.hpp" />
+    <ClInclude Include="sdk\interfaces\IPanel.hpp" />
+    <ClInclude Include="sdk\interfaces\ISurface.hpp" />
+    <ClInclude Include="sdk\interfaces\IVDebugOverlay.hpp" />
   </ItemGroup>
 </Project>

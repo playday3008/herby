@@ -17,6 +17,12 @@ struct AppSystemInfo_t
 typedef void* (*CreateInterfaceFn)(const char* szName, int* iReturnCode);
 using pfnDemoCustomDataCallback = void(unsigned char* pData, size_t iSize);
 
+class IBaseInterface
+{
+public:
+	virtual	~IBaseInterface() {}
+};
+
 class IAppSystem
 {
 public:
