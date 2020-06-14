@@ -143,7 +143,10 @@ namespace MD5
 	*/
 	void MD5Transform(unsigned int buf[4], unsigned int const in[16])
 	{
+#pragma warning( push )
+#pragma warning( disable : 5033 )
 		register unsigned int a, b, c, d;
+#pragma warning( pop )
 
 		a = buf[0];
 		b = buf[1];
