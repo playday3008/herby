@@ -48,7 +48,7 @@ std::uintptr_t ScanLocation( const std::uintptr_t location,
 
 		if( read )
 		{
-			for( auto i = 0; i < read; i++ )
+			for( size_t i = 0; i < read; i++ )
 			{
 				scan_result = *( std::uintptr_t* )( scan_result );
 
