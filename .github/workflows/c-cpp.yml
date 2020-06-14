@@ -12,12 +12,12 @@ jobs:
     - name: Setup MSBuild.exe
       uses: warrenbuckley/Setup-MSBuild@v1
     - name: MSBuild
-      run: msbuild herby.vcxproj /p:Configuration=Release /p:Platform=Win32 /p:VisualStudioVersion=16.0 /v:m
+      run: msbuild herby.vcxproj /p:Configuration=Release /p:VisualStudioVersion=16.0 /v:m
     - name: SHA1 
-      working-directory: bin
+      working-directory: Release
       run: sha1sum herby.dll > herby.dll.sha1
       
     - uses: actions/upload-artifact@v1
       with:
         name: herby
-        path: bin
+        path: Release
