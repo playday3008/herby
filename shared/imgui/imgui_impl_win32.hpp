@@ -8,20 +8,23 @@
 //  [X] Platform: Gamepad support. Enabled with 'io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad'.
 
 #pragma once
-#include <windows.h>
+#include "imgui.hpp"      // IMGUI_IMPL_API
 
 IMGUI_IMPL_API bool     ImGui_ImplWin32_Init(void* hwnd);
 IMGUI_IMPL_API void     ImGui_ImplWin32_Shutdown();
 IMGUI_IMPL_API void     ImGui_ImplWin32_NewFrame();
 
-// Configuration: Disable gamepad support or linking with xinput.lib
+// Configuration
+// - Disable gamepad support or linking with xinput.lib
 //#define IMGUI_IMPL_WIN32_DISABLE_GAMEPAD
 //#define IMGUI_IMPL_WIN32_DISABLE_LINKING_XINPUT
 
-// Win32 message handler
-// - Intentionally commented out in a '#if 0' block to avoid dragging dependencies on <windows.h>
-// - You can COPY this line into your .cpp code to forward declare the function.
-IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+// Win32 message handler your application need to call.
+// - Intentionally commented out in a '#if 0' block to avoid dragging dependencies on <windows.h> from this helper.
+// - You should COPY the line below into your .cpp code to forward declare the function and then you can call it.
+#if 0
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+#endif
 
 // DPI-related helpers (optional)
 // - Use to enable DPI awareness without having to create an application manifest.
