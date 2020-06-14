@@ -30,7 +30,7 @@ bool Create()
 	auto& renderer = engine::Renderer::Instance();
 	auto& net_prop_system = engine::NetPropSystem::Instance();
 
-	engine::Factory factory_client( "client_panorama.dll" );
+	engine::Factory factory_client( "client.dll" );
 	engine::Factory factory_engine( "engine.dll" );
 
 	if( !input.Create() )
@@ -64,12 +64,12 @@ bool Create()
 	if (!m_debug_overlay)
 		return false;
 
-	m_input = memory::scan< CInput* >(L"client_panorama.dll", "B9 ? ? ? ? F3 0F 11 04 24 FF 50 10", 1, 1u);
+	m_input = memory::scan< CInput* >(L"client.dll", "B9 ? ? ? ? F3 0F 11 04 24 FF 50 10", 1, 1u);
 
 	if (!m_input)
 		return false;
 
-	m_globals = memory::scan< CGlobalVarsBase* >( L"client_panorama.dll", "A1 ? ? ? ? 0F 57 ED", 1, 2 );
+	m_globals = memory::scan< CGlobalVarsBase* >( L"client.dll", "A1 ? ? ? ? 0F 57 ED", 1, 2 );
 
 	if( !m_globals )
 		return false;
